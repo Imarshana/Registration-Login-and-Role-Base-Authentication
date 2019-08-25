@@ -1,0 +1,41 @@
+    <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+
+      <!-- {{service.formModel.value|json}} -->
+      <div class="form-group required">
+        <label>User Name</label>
+        <input class="form-control" formControlName="UserName">
+        <label class="text-danger" *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">User Name is required</label>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" formControlName="Email">
+        <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Invalid Email Address</label>
+      </div>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input class="form-control" formControlName="FullName">
+      </div>
+
+      <div formGroupName="Passwords">
+      <div class="form-group required">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="Password">
+      <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">Password is required</label>
+      <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Minimum 4 characteristics are required</label>
+      </div>
+      
+      <div class="form-group required">
+      <label>Comfirm Password</label>
+      <input type="password" class="form-control" formControlName="ComfirmPassword">
+      <label class="text-danger" *ngIf="service.formModel.get('Passwords.ComfirmPassword').touched && service.formModel.get('Passwords.ComfirmPassword').errors?.required">Comfirm Password is required</label>
+      <label class="text-danger" *ngIf="service.formModel.get('Passwords.ComfirmPassword').touched && service.formModel.get('Passwords.ComfirmPassword').errors?.passwordMisMatch">Comfirm Password does not match</label>  
+    </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-8 offset-md-2">
+        <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Sign Up</button>
+      </div>
+    </div>
+  </form>     
